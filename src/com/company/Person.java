@@ -4,9 +4,9 @@ public class Person {
     private String name;
     private String surname;
     private String patronymic;
-    private int number;
+    private String number;
 
-    public Person(String name, String surname, String patronymic, int number) {
+    public Person(String name, String surname, String patronymic, String number) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
@@ -37,11 +37,11 @@ public class Person {
         this.patronymic = patronymic;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 }

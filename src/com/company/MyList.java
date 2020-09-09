@@ -5,7 +5,7 @@ public class MyList {
 
     private int size = 0;
 
-    public void add(Number item) {
+    public void add(Person item) {
         Node node = new Node(item, null);
         if (header.next != null) {
             Node last = entry(size-1);
@@ -28,7 +28,7 @@ public class MyList {
         size--;
     }
 
-    public Number get(int i) {
+    public Person get(int i) {
         return entry(i).element;
     }
 
@@ -53,13 +53,13 @@ public class MyList {
     }
 
     private static class Node {
-        Number element;
+        Person element;
         Node next;
 
         Node() {
         }
 
-        Node(Number element, Node next) {
+        Node(Person element, Node next) {
             this.element = element;
             this.next = next;
         }
