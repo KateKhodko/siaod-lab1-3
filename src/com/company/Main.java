@@ -15,9 +15,10 @@ public class Main {
                 switch (n) {
                     case 1:
                         personList.add(inputPerson(personList));
-                        sort(personList);
                         break;
                     case 2:
+                        sort(personList);
+                        print(personList);
                         return;
                     default:
                         System.out.println("Пункт меню введен не верно");
@@ -55,7 +56,6 @@ public class Main {
             Scanner scan = new Scanner(System.in);
             String number = scan.nextLine();
             if (number.matches("(\\s*([0-9]{7})\\s*)+")){
-                System.out.println(number);
                 return number;
             } else {
                 System.out.println("Неккоректный ввод номера телефона");
@@ -65,8 +65,38 @@ public class Main {
 
     public static MyList sort(MyList personList){
         for (int i = 0; i < personList.size(); i++) {
-            String min = personList.get(i).getName();
+            Person min = personList.get(i);
+            int minInd = i;
+            for (int j = i; j < personList.size(); j++) {
+                if (min.getSurname().compareToIgnoreCase(personList.get(j).getSurname()) > 0) {
+                    minInd = j;
+                } else if (min.getSurname().compareToIgnoreCase(personList.get(j).getSurname()) == 0) {
+                    if (min.getName().compareToIgnoreCase(personList.get(j).getName()) > 0) {
+                        minInd = j;
+                    }  else if (min.getName().compareToIgnoreCase(personList.get(j).getName()) == 0) {
+                        if (min.getPatronymic().compareToIgnoreCase(personList.get(j).getPatronymic()) > 0) {
+                            minInd = j;
+                        }
+                    }
+                }
+            }
+            Person temp = personList.get(i);
+            personList.set(i, personList.get(minInd));
+            personList.set(minInd, temp);
+        }
+        return personList;
+    }
+
+    public static void print(MyList personList) {
+        for (int i = 0; i < personList.size(); i++) {
+            System.out.println(personList.get(i).toString());
+        }
+    }
+
+    public static void searchByPhone(MyList personList) {
+        for (int i = 0; i < personList.size(); i++) {
 
         }
     }
+
 }

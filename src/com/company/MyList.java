@@ -28,6 +28,11 @@ public class MyList {
         size--;
     }
 
+    public void set(int index, Person person) {
+        Node node = entry(index);
+        node.element = person;
+    }
+
     public Person get(int i) {
         return entry(i).element;
     }
