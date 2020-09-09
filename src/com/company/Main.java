@@ -9,7 +9,7 @@ public class Main {
         do {
             Scanner scan = new Scanner(System.in);
             System.out.println("1.Добавить абонента\n" +
-                    "2.Вывод списка абонентов\n"+
+                    "2.Вывод списка абонентов\n" +
                     "3.Поиск абонента по номеру телефона\n" +
                     "4.Поиск номера телефона по фамилии абонента\n" +
                     "5.Выход");
@@ -25,13 +25,7 @@ public class Main {
                         break;
                     case 3:
                         if (!personList.isEmpty()) {
-                            String number = inputPhoneNumber();
-                            Person person = searchByPhone(number, personList);
-                            if (person != null) {
-                                System.out.println(person.toString());
-                            } else {
-                                System.out.println("Абонент с таким номером не найден");
-                            }
+                            searchByPhone(personList);
                         } else {
                             System.out.println("Список абонентов пуст");
                         }
@@ -60,13 +54,17 @@ public class Main {
         System.out.println("Введите отчество");
         String patronymic = inputNSP();
         String number = "";
-        while (true) {
-           number = inputPhoneNumber();
-           if (searchByPhone(number, personList) == null) {
-               break;
-           } else {
-               System.out.println("Такой номер телефона уже существует!");
-           }
+        boolean flag = true;
+        while (flag) {
+            flag = false;
+            number = inputPhoneNumber();
+            for (int i = 0; i < personList.size(); i++) {
+                if (personList.get(i).getNumber().equals(number)) {
+                    flag = true;
+                    System.out.println("Такой номер телефона уже существует!");
+                    break;
+                }
+            }
         }
         return new Person(surname, name, patronymic, number);
     }
@@ -126,14 +124,14 @@ public class Main {
         }
     }
 
-    public static Person searchByPhone(String number, MyList personList) {
-        Person person = null;
+    public static void searchByPhone(MyList personList) {
+        String number = "";
         for (int i = 0; i < personList.size(); i++) {
             if (personList.get(i).getNumber().equals(number)) {
-                person = personList.get(i);
+                System.out.println(personList.get(i).toString());
             }
         }
-        return person;
+        System.out.println("Абонент с таким номером не найден");
     }
 
     public static void searchBySurname(MyList personList) {
