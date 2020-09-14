@@ -20,8 +20,12 @@ public class Main {
                         personList.add(inputPersonInfo(personList));
                         break;
                     case 2:
-                        sort(personList);
-                        print(personList);
+                        if (!personList.isEmpty()) {
+                            sort(personList);
+                            print(personList);
+                        } else {
+                            System.out.println("Список абонентов пуст");
+                        }
                         break;
                     case 3:
                         if (!personList.isEmpty()) {
@@ -42,6 +46,8 @@ public class Main {
                     default:
                         System.out.println("Пункт меню введен не верно");
                 }
+            } else {
+                System.out.println("Пункт меню введен не верно");
             }
         } while (true);
     }
@@ -96,16 +102,15 @@ public class Main {
 
     public static MyList sort(MyList personList) {
         for (int i = 0; i < personList.size(); i++) {
-            Person min = personList.get(i);
             int minInd = i;
             for (int j = i; j < personList.size(); j++) {
-                if (min.getSurname().compareToIgnoreCase(personList.get(j).getSurname()) > 0) {
+                if (personList.get(minInd).getSurname().compareToIgnoreCase(personList.get(j).getSurname()) > 0) {
                     minInd = j;
-                } else if (min.getSurname().compareToIgnoreCase(personList.get(j).getSurname()) == 0) {
-                    if (min.getName().compareToIgnoreCase(personList.get(j).getName()) > 0) {
+                } else if (personList.get(minInd).getSurname().compareToIgnoreCase(personList.get(j).getSurname()) == 0) {
+                    if (personList.get(minInd).getName().compareToIgnoreCase(personList.get(j).getName()) > 0) {
                         minInd = j;
-                    } else if (min.getName().compareToIgnoreCase(personList.get(j).getName()) == 0) {
-                        if (min.getPatronymic().compareToIgnoreCase(personList.get(j).getPatronymic()) > 0) {
+                    } else if (personList.get(minInd).getName().compareToIgnoreCase(personList.get(j).getName()) == 0) {
+                        if (personList.get(minInd).getPatronymic().compareToIgnoreCase(personList.get(j).getPatronymic()) > 0) {
                             minInd = j;
                         }
                     }
@@ -125,10 +130,12 @@ public class Main {
     }
 
     public static void searchByPhone(MyList personList) {
-        String number = "";
+        String number = inputPhoneNumber();
+        System.out.println(number);
         for (int i = 0; i < personList.size(); i++) {
             if (personList.get(i).getNumber().equals(number)) {
                 System.out.println(personList.get(i).toString());
+                return;
             }
         }
         System.out.println("Абонент с таким номером не найден");
@@ -139,7 +146,7 @@ public class Main {
         String surname = inputNSP();
         boolean flag = false;
         for (int i = 0; i < personList.size(); i++) {
-            if (personList.get(i).getSurname().equals(surname)) {
+            if (personList.get(i).getSurname().equalsIgnoreCase(surname)) {
                 System.out.println(personList.get(i).toString());
                 flag = true;
             }
