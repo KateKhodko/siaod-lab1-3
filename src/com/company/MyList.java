@@ -1,7 +1,5 @@
 package com.company;
 
-import com.sun.source.tree.NewArrayTree;
-
 public class MyList {
     private final Node header = new Node();
     private Node current = header;
@@ -9,32 +7,9 @@ public class MyList {
     private int size = 0;
 
     public void add(Person item) {
-        /*
-        Node node = new Node(item, null);
-        if (header.next != null) {
-            Node last = entry(size-1);
-            last.next = node;
-        } else {
-            header.next = node;
-        }
-        size++;
-         */
         current.next = new Node(item, null);
         current = current.next;
         size++;
-    }
-
-    public void remove(int index) {
-        Node node = entry(index);
-        if
-        (node.next != null) {
-            node.element = node.next.element;
-            node.next = node.next.next;
-        } else {
-            node.element  = null;
-            node.next = null;
-        }
-        size--;
     }
 
     public void set(int index, Person person) {
